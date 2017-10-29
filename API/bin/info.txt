@@ -1,0 +1,7 @@
+To build and run from command line:
+	-> mvn install
+	-> java -jar target/spring-boot-1.0-SNAPSHOT.jar
+	
+To kill port 8080 if build does not work:
+	-> sudo lsof -i tcp:8080
+	-> kill -9 <PDN>
