@@ -169,13 +169,8 @@ public class User implements Serializable{
     		return this.jsonToken;
     }
     
-    public void setJsonToken(String key) {
-    		//Using JWT to encrypt the object
-	    	String compactJws = Jwts.builder()
-	    	  .setSubject(this.firstName)
-	    	  .signWith(SignatureAlgorithm.HS512, key)
-	    	  .compact();
-	    	this.jsonToken = compactJws;
+    public void setJsonToken(String token) {
+    		this.jsonToken = token;
     }
     
     //PRIVATE METHODS
