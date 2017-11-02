@@ -39,24 +39,18 @@ public class User implements Serializable{
     @Column(name = "image_url_thumb")
     private String profileImageThumbnail;
 
-    @Column(name = "username")
-    private String username;
-
     @Column(name = "password")
     private char[] password;
 
     
     //CONSTRUCTORS
-
-
-    public User(Long id, String firstName, String lastName, String email, String profileImage, String profileImageThumbnail, String username, char[] password) {
+    public User(Long id, String firstName, String lastName, String email, String profileImage, String profileImageThumbnail, char[] password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.profileImage = profileImage;
         this.profileImageThumbnail = profileImageThumbnail;
-        this.username = username;
         this.password = password;
     }
 
@@ -64,7 +58,6 @@ public class User implements Serializable{
 
         this.firstName 		        = null;
         this.lastName   		    = null;
-        this.username   		    = null;
         this.password   		    = null;
         this.email 			        = null;
         this.profileImage 	        = null;
@@ -117,14 +110,6 @@ public class User implements Serializable{
 
     public void setProfileImageThumbnail(String profileImageThumbnail) {
         this.profileImageThumbnail = profileImageThumbnail;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public char[] getPassword() {
