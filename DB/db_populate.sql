@@ -9,3 +9,7 @@ INSERT INTO `property_management_app`.`user` (`user_id`, `first_name`, `last_nam
 INSERT INTO `property_management_app`.`user` (`user_id`, `first_name`, `last_name`, `email`, `password`, `role_id`, `image_url_main`, `image_url_thumb`) VALUES ('2', 'Anthony', 'Forsythe', 'forsythetony@gmail.com', 'test', '2', 'test.png', 'test3.png');
 INSERT INTO `property_management_app`.`user` (`user_id`, `first_name`, `last_name`, `email`, `password`, `role_id`, `image_url_main`, `image_url_thumb`) VALUES ('3', 'David', 'Dean', 'daviddean@gmail.com', 'testtest', '1', 'test.png', 'test2.png');
 INSERT INTO `property_management_app`.`user` (`user_id`, `first_name`, `last_name`, `email`, `password`, `role_id`, `image_url_main`, `image_url_thumb`) VALUES ('4', 'Taylor', 'Ratliff', 'tayratliff@gmail.com', 'testtest', '1', 'test.png', 'test3.png');
+
+#Property table
+INSERT INTO `property_management_app`.`property` (`street_address`, `state`, `zip`, `image_url_main`, `image_url_thumb`) VALUES ('6626 Mardel Avenue', 'MO', '63109', 'testhouseimage.png', 'testimgthumb.png');
+INSERT INTO `property_management_app`.`property` (`street_address`, `state`, `zip`, `image_url_main`, `image_url_thumb`) VALUES ('2134 W Dell St.', 'MN', '55104', 'testhouseimage.png', 'testhouseimage.png');
