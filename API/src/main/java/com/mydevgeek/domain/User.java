@@ -45,14 +45,11 @@ public class User implements Serializable{
     @Column(name = "password")
     private char[] password;
 
-    @Column(name = "password_salt")
-    private byte password_salt;
-
     
     //CONSTRUCTORS
 
 
-    public User(Long id, String firstName, String lastName, String email, String profileImage, String profileImageThumbnail, String username, char[] password, byte password_salt) {
+    public User(Long id, String firstName, String lastName, String email, String profileImage, String profileImageThumbnail, String username, char[] password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -61,7 +58,6 @@ public class User implements Serializable{
         this.profileImageThumbnail = profileImageThumbnail;
         this.username = username;
         this.password = password;
-        this.password_salt = password_salt;
     }
 
     public User() {
@@ -139,11 +135,4 @@ public class User implements Serializable{
         this.password = password;
     }
 
-    public byte getPassword_salt() {
-        return password_salt;
-    }
-
-    public void setPassword_salt(byte password_salt) {
-        this.password_salt = password_salt;
-    }
 }
