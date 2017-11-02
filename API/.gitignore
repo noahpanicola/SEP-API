@@ -6,28 +6,28 @@ target/
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
-API/.idea/**/workspace.xml
-API/.idea/**/tasks.xml
-API/.idea/dictionaries
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
 
 # Sensitive or high-churn files:
-API/.idea/**/dataSources/
-API/.idea/**/dataSources.ids
-API/.idea/**/dataSources.xml
-API/.idea/**/dataSources.local.xml
-API/.idea/**/sqlDataSources.xml
-API/.idea/**/dynamic.xml
-API/.idea/**/uiDesigner.xml
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.xml
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
 
 # Gradle:
-API/.idea/**/gradle.xml
-API/.idea/**/libraries
+.idea/**/gradle.xml
+.idea/**/libraries
 
 # CMake
 cmake-build-debug/
 
 # Mongo Explorer plugin:
-API/.idea/**/mongoSettings.xml
+.idea/**/mongoSettings.xml
 
 ## File-based project format:
 *.iws
@@ -38,13 +38,13 @@ API/.idea/**/mongoSettings.xml
 out/
 
 # mpeltonen/sbt-idea plugin
-API/.idea_modules/
+.idea_modules/
 
 # JIRA plugin
 atlassian-ide-plugin.xml
 
 # Cursive Clojure plugin
-API/.idea/replstate.xml
+.idea/replstate.xml
 
 # Crashlytics plugin (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml

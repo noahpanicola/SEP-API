@@ -18,14 +18,17 @@ CREATE TABLE `role` (
 /*
   USER TABLE
 */
+--  FIXME:
+--    For right now I'm going to allow the password and password_salt fields to
+--    be NULL just for testing purposes. This should be changed.
 CREATE TABLE `user` (
 
   user_id             SERIAL,
   first_name          VARCHAR(200) NOT NULL DEFAULT '',
   last_name           VARCHAR(200) NOT NULL DEFAULT '',
   email               VARCHAR(200) NOT NULL DEFAULT '',
-  password            CHAR(128),
-  password_salt       BINARY(64),
+  password            CHAR(128) NULL,
+  password_salt       BINARY(64) NULL,
   role_id             SMALLINT UNSIGNED NOT NULL DEFAULT 0,
   image_url           VARCHAR(2083),
   PRIMARY KEY (user_id),
