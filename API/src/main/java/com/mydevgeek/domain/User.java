@@ -84,8 +84,7 @@ public class User implements Serializable{
         this.profileImage 	        = null;
         this.profileImageThumbnail  = null;
     }
-    
-    //PUBLIC METHODS
+
     public Long getId() {
         return id;
     }
@@ -110,6 +109,30 @@ public class User implements Serializable{
         this.lastName = lastName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
+
+    public String getProfileImageThumbnail() {
+        return profileImageThumbnail;
+    }
+
+    public void setProfileImageThumbnail(String profileImageThumbnail) {
+        this.profileImageThumbnail = profileImageThumbnail;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -126,52 +149,11 @@ public class User implements Serializable{
         this.password = password;
     }
 
-    public Date getCreated() {
-        return created;
+    public byte getPassword_salt() {
+        return password_salt;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
+    public void setPassword_salt(byte password_salt) {
+        this.password_salt = password_salt;
     }
-
-    public Date getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
-    
-    public String getEmail() {
-    		return this.email;
-    }
-    
-    public void setEmail(String email) {
-    		this.email = email;
-    }
-    
-    public int getAuthLevel() {
-    		return this.authLevel;
-    }
-    public void setAuthLevel(int al) {
-    		this.authLevel = al;
-    }
-    
-    public String getImage() {
-    		return this.profileImage;
-    }
-    
-    public void setImage(String image) {
-    		this.profileImage = image;
-    }
-    
-    public String getJsonToken() {
-    		return this.jsonToken;
-    }
-    
-    public void setJsonToken(String token) {
-    		this.jsonToken = token;
-    }
-    
-    //PRIVATE METHODS
 }
