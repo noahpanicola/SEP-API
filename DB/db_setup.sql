@@ -30,7 +30,8 @@ CREATE TABLE `user` (
   password            CHAR(128) NULL,
   password_salt       BINARY(64) NULL,
   role_id             SMALLINT UNSIGNED NOT NULL DEFAULT 0,
-  image_url           VARCHAR(2083),
+  image_url_main      VARCHAR(2083),
+  image_url_thumb     VARCHAR(2083),
   PRIMARY KEY (user_id),
   FOREIGN KEY (role_id) REFERENCES role(role_id)
 );

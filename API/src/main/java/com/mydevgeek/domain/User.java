@@ -21,7 +21,7 @@ public class User implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "user_id")
     private Long id;
 
     @Column(name = "first_name")
@@ -33,11 +33,11 @@ public class User implements Serializable{
     @Column(name = "email")
     private String email;
     
-    @Column(name = "auth_level")
-    private int authLevel;
-    
-    @Column(name = "profileimage")
+    @Column(name = "image_url_main")
     private String profileImage;
+
+    @Column(name = "image_url_thumb")
+    private String profileImageThumbnail;
 
     @Column(name = "username")
     private String username;
@@ -45,44 +45,44 @@ public class User implements Serializable{
     @Column(name = "password")
     private char[] password;
 
-    @Column(name = "json_token")
-    private String jsonToken;
+    @Column(name = "password_salt")
+    private byte password_salt;
 
-    @Column(name = "created")
-    @CreationTimestamp
-    private Date created;
-
-    @Column(name = "updated")
-    @UpdateTimestamp
-    private Date updated;
     
     //CONSTRUCTORS
-    public User(String firstName, String lastName, String username, char[] password, Date created, Date updated, String email, String jto, int al, String image) {
 
-        this.firstName  		= firstName;
-        this.lastName   		= lastName;
-        this.username   		= username;
-        this.password   		= password;
-        this.created    		= created;
-        this.updated    		= updated;
-        this.email 			= email;
-        this.jsonToken 		= jto;
-        this.authLevel 		= al;
-        this.profileImage 	= image;
+
+    public User(    Long id,
+                    String firstName,
+                    String lastName,
+                    String email,
+                    String profileImage,
+                    String profileImageThumbnail,
+                    String username,
+                    char[] password,
+                    byte password_salt)
+    {
+
+        this.id = id;
+        this.firstName              = firstName;
+        this.lastName               = lastName;
+        this.email                  = email;
+        this.profileImage           = profileImage;
+        this.profileImageThumbnail  = profileImageThumbnail;
+        this.username               = username;
+        this.password               = password;
+        this.password_salt          = password_salt;
     }
-    
+
     public User() {
 
-        this.firstName 		= null;
-        this.lastName   		= null;
-        this.username   		= null;
-        this.password   		= null;
-        this.created    		= null;
-        this.updated    		= null;
-        this.email 			= null;
-        this.jsonToken 		= null;
-        this.authLevel 		= 0;
-        this.profileImage 	= null;
+        this.firstName 		        = null;
+        this.lastName   		    = null;
+        this.username   		    = null;
+        this.password   		    = null;
+        this.email 			        = null;
+        this.profileImage 	        = null;
+        this.profileImageThumbnail  = null;
     }
     
     //PUBLIC METHODS
