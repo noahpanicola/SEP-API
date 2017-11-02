@@ -52,9 +52,6 @@ public class UserController {
                                     0,
                                     null);
         
-        JwtAuth jwta = new JwtAuth(newUser);
-        newUser.setJsonToken(jwta.jwtEncode("secretkey12345"));
-        
         //return the user in JSON format and save in the database
         return ResponseEntity.accepted().body(userRepository.save(newUser));
     }
