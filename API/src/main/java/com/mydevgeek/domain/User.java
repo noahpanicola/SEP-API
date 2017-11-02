@@ -52,26 +52,16 @@ public class User implements Serializable{
     //CONSTRUCTORS
 
 
-    public User(    Long id,
-                    String firstName,
-                    String lastName,
-                    String email,
-                    String profileImage,
-                    String profileImageThumbnail,
-                    String username,
-                    char[] password,
-                    byte password_salt)
-    {
-
+    public User(Long id, String firstName, String lastName, String email, String profileImage, String profileImageThumbnail, String username, char[] password, byte password_salt) {
         this.id = id;
-        this.firstName              = firstName;
-        this.lastName               = lastName;
-        this.email                  = email;
-        this.profileImage           = profileImage;
-        this.profileImageThumbnail  = profileImageThumbnail;
-        this.username               = username;
-        this.password               = password;
-        this.password_salt          = password_salt;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.profileImage = profileImage;
+        this.profileImageThumbnail = profileImageThumbnail;
+        this.username = username;
+        this.password = password;
+        this.password_salt = password_salt;
     }
 
     public User() {

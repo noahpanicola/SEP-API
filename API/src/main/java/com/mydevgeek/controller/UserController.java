@@ -41,16 +41,7 @@ public class UserController {
         //  Build a new user from the JSON
         java.sql.Date dateCreated = convertUtilToSql(new Date());
         
-        User newUser = new User(    payload.get("first_name"),
-                                    payload.get("last_name"),
-                                    payload.get("email"),
-                                    payload.get("password").toCharArray(),
-                                    dateCreated,
-                                    dateCreated,
-                                    payload.get("email"),
-                                    null,
-                                    0,
-                                    null);
+        User newUser = new User();
         
         //return the user in JSON format and save in the database
         return ResponseEntity.accepted().body(userRepository.save(newUser));
