@@ -1,8 +1,5 @@
-/Users/Noah/Documents/SpringBoot/SoftwareEngProj/1.0.0/WebAPI/src/main/java/com/mydevgeek/controller/HelloController.java
-/Users/Noah/Documents/SpringBoot/SoftwareEngProj/1.0.0/WebAPI/src/main/java/com/mydevgeek/repo/UserRepository.java
-/Users/Noah/Documents/SpringBoot/SoftwareEngProj/1.0.0/WebAPI/src/main/java/com/mydevgeek/domain/User.java
-/Users/Noah/Documents/SpringBoot/SoftwareEngProj/1.0.0/WebAPI/src/main/java/com/mydevgeek/app/Application.java
-/Users/Noah/Documents/SpringBoot/SoftwareEngProj/1.0.0/WebAPI/src/main/java/com/mydevgeek/domain/HtmlModule.java
-/Users/Noah/Documents/SpringBoot/SoftwareEngProj/1.0.0/WebAPI/src/main/java/com/mydevgeek/controller/UserController.java
-/Users/Noah/Documents/SpringBoot/SoftwareEngProj/1.0.0/WebAPI/src/main/java/com/mydevgeek/controller/HtmlModuleController.java
-/Users/Noah/Documents/SpringBoot/SoftwareEngProj/1.0.0/WebAPI/src/main/java/com/mydevgeek/repo/HtmlModuleRepository.java
+/Users/Noah/Desktop/Software Engineering/PropertyManager/SEP-API/API/src/main/java/com/mydevgeek/domain/User.java
+/Users/Noah/Desktop/Software Engineering/PropertyManager/SEP-API/API/src/main/java/com/mydevgeek/repo/UserRepository.java
+/Users/Noah/Desktop/Software Engineering/PropertyManager/SEP-API/API/src/main/java/com/mydevgeek/controller/HelloController.java
+/Users/Noah/Desktop/Software Engineering/PropertyManager/SEP-API/API/src/main/java/com/mydevgeek/app/Application.java
+/Users/Noah/Desktop/Software Engineering/PropertyManager/SEP-API/API/src/main/java/com/mydevgeek/controller/UserController.java
