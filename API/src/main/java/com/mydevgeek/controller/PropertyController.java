@@ -30,9 +30,21 @@ public class PropertyController {
     
     /* FIND A PROPERTY BY STATE */
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public List<Property> getUserByState(@RequestParam("state") String state)
+    public List<Property> getPropertyByState(@RequestParam("state") String state)
     {
     		return propertyRepository.findByState(state);
+    }
+    
+    /* FIND A PROPERTY BY USER ID */
+    @RequestMapping(value = "/user", method = RequestMethod.GET, produces = "application/json")
+    public List<Property> getPropertyByUserId(@RequestParam("uid") Long uid)
+    {
+    		List<Property> p = propertyRepository.findByUserId(uid);
+    		if(p.isEmpty()) {
+    			return null;
+    		} else {
+    			return p;
+    		}
     }
 
 }
