@@ -11,5 +11,32 @@ INSERT INTO `property_management_app`.`user` (`user_id`, `first_name`, `last_nam
 INSERT INTO `property_management_app`.`user` (`user_id`, `first_name`, `last_name`, `email`, `password`, `role_id`, `image_url_main`, `image_url_thumb`) VALUES ('4', 'Taylor', 'Ratliff', 'tayratliff@gmail.com', 'testtest', '1', 'test.png', 'test3.png');
 
 #Property table
-INSERT INTO `property_management_app`.`property` (`street_address`, `state`, `zip`, `image_url_main`, `image_url_thumb`) VALUES ('6626 Mardel Avenue', 'MO', '63109', 'testhouseimage.png', 'testimgthumb.png');
-INSERT INTO `property_management_app`.`property` (`street_address`, `state`, `zip`, `image_url_main`, `image_url_thumb`) VALUES ('2134 W Dell St.', 'MN', '55104', 'testhouseimage.png', 'testhouseimage.png');
+INSERT INTO `property_management_app`.`property` (  `street_address`,
+                                                    `state`, `zip`,
+                                                    `image_url_main`,
+                                                    `image_url_thumb`,
+                                                    `coord_lat`,
+                                                    `coord_long`)
+                                        VALUES (    '1609 University Avenue',
+                                                    'MO',
+                                                    '65201',
+                                                    'testhouseimage.png',
+                                                    'testimgthumb.png',
+                                                    38.946796,
+                                                    -92.316347
+                                              );
+
+INSERT INTO `property_management_app`.`property` (  `street_address`,
+                                                    `state`, `zip`,
+                                                    `image_url_main`,
+                                                    `image_url_thumb`,
+                                                    `coord_lat`,
+                                                    `coord_long`)
+                                        VALUES (    '1603 Hinkson Avenue',
+                                                    'MO',
+                                                    '65201',
+                                                    'testhouseimage.png',
+                                                    'testimgthumb.png',
+                                                    38.956890,
+                                                    -92.316221
+                                              );

@@ -41,12 +41,14 @@ CREATE TABLE `user` (
 
 CREATE TABLE `property` (
 
-  property_id       SERIAL,
-  street_address    VARCHAR(200) NOT NULL DEFAULT '',
-  state             VARCHAR(2),
-  zip               VARCHAR(10),
-  image_url_main    VARCHAR(2083),
-  image_url_thumb   VARCHAR(2083),
+  property_id         SERIAL,
+  street_address      VARCHAR(200) NOT NULL DEFAULT '',
+  state               VARCHAR(2),
+  zip                 VARCHAR(10),
+  image_url_main      VARCHAR(2083),
+  image_url_thumb     VARCHAR(2083),
+  coord_lat           DECIMAL(7,4) NOT NULL DEFAULT 0.0,
+  coord_long          DECIMAL(7,4) NOT NULL DEFAULT 0.0,
   PRIMARY KEY (property_id)
 );
 

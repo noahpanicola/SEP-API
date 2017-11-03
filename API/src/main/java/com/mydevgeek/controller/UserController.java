@@ -54,7 +54,7 @@ public class UserController {
         java.sql.Date dateCreated = convertUtilToSql(new Date());
 
         User newUser = new User();
-        
+
         //return the user in JSON format and save in the database
         return ResponseEntity.accepted().body(userRepository.save(newUser));
     }
