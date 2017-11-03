@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.hibernate.mapping.List;
+
+
 
 @RestController
 @RequestMapping("/property")
@@ -24,9 +27,9 @@ public class PropertyController {
     
     /* FIND A PROPERTY BY STATE */
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<Property> getUserByEmail(@RequestParam("state") String state)
+    public ResponseEntity<List> getUserByEmail(@RequestParam("state") String state)
     {
-        Property p = propertyRepository.findByState(state);
+        List p = propertyRepository.findByState(state);
         return ResponseEntity.accepted().body(p);
     }
 

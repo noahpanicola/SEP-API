@@ -27,6 +27,12 @@ public class Property implements Serializable {
 	@Column(name = "image_url_thumb")
 	private String imgUrlThumb;
 	
+	@Column(name = "coord_lat")
+	private double latitude;
+	
+	@Column(name = "coord_long")
+	private double longitude;
+	
 	public Property() {
 		this.id = null;
 		this.streetAddress 	= null;
@@ -34,15 +40,19 @@ public class Property implements Serializable {
 		this.zip 			= null;
 		this.imgUrlMain 		= null;
 		this.imgUrlThumb 	= null;
+		this.latitude		= 0.0;
+		this.longitude		= 0.0;
 	}
 	
-	public Property(String addr, String state, String zip, String mainimg, String thumbimg) {
+	public Property(String addr, String state, String zip, String mainimg, String thumbimg, double lat, double lon) {
 		this.id 				= null;
 		this.streetAddress 	= addr;
 		this.state 			= state;
 		this.zip 			= zip;
 		this.imgUrlMain 		= mainimg;
 		this.imgUrlThumb 	= thumbimg;
+		this.latitude 		= lat;
+		this.longitude 		= lon;
 	}
 	
 	public Long getId() {
@@ -91,6 +101,22 @@ public class Property implements Serializable {
 	
 	public void setImgUrlThumb(String str) {
 		this.imgUrlThumb = str;
+	}
+	
+	public double getLatitude() {
+		return this.latitude;
+	}
+	
+	public void setLatitude(double lat) {
+		this.latitude = lat;
+	}
+	
+	public double getLongitude() {
+		return this.longitude;
+	}
+	
+	public void setLongitude(double lon) {
+		this.longitude = lon;
 	}
 		
 }
