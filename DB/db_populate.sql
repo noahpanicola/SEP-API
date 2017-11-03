@@ -20,8 +20,8 @@ INSERT INTO `property_management_app`.`property` (  `street_address`,
                                         VALUES (    '1609 University Avenue',
                                                     'MO',
                                                     '65201',
-                                                    'testhouseimage.png',
-                                                    'testimgthumb.png',
+                                                    'https://i.imgur.com/DqS7BbZ.jpg',
+                                                    'https://i.imgur.com/DqS7BbZ.jpg',
                                                     38.946796,
                                                     -92.316347
                                               );
@@ -35,13 +35,43 @@ INSERT INTO `property_management_app`.`property` (  `street_address`,
                                         VALUES (    '1603 Hinkson Avenue',
                                                     'MO',
                                                     '65201',
-                                                    'testhouseimage.png',
-                                                    'testimgthumb.png',
+                                                    'https://i.imgur.com/Iwlxnpn.png',
+                                                    'https://i.imgur.com/Iwlxnpn.png',
                                                     38.956890,
                                                     -92.316221
                                               );
 
+INSERT INTO `property_management_app`.`property` (  `street_address`,
+                                                    `state`, `zip`,
+                                                    `image_url_main`,
+                                                    `image_url_thumb`,
+                                                    `coord_lat`,
+                                                    `coord_long`)
+                                        VALUES (    '1512 Ross Street',
+                                                    'MO',
+                                                    '65201',
+                                                    'https://i.imgur.com/0qymran.png',
+                                                    'https://i.imgur.com/0qymran.png',
+                                                    38.943656,
+                                                    -92.317632
+                                              );
 
+INSERT INTO `property_management_app`.`property` (  `street_address`,
+                                                    `state`, `zip`,
+                                                    `image_url_main`,
+                                                    `image_url_thumb`,
+                                                    `coord_lat`,
+                                                    `coord_long`)
+                                        VALUES (    '413 Hitt Street',
+                                                    'MO',
+                                                    '65201',
+                                                    'https://i.imgur.com/V38g1Rv.png',
+                                                    'https://i.imgur.com/V38g1Rv.png',
+                                                    38.946876,
+                                                    -92.325776
+                                              );
 -- Assign properties to users
 INSERT INTO `property_management_app`.`user_property` ( `user_id`, `property_id`, `is_manager`) VALUES ( 1 , 1, 1);
 INSERT INTO `property_management_app`.`user_property` ( `user_id`, `property_id`, `is_manager`) VALUES ( 1 , 2, 1);
+INSERT INTO `property_management_app`.`user_property` ( `user_id`, `property_id`, `is_manager`) VALUES ( 1 , 3, 1);
+INSERT INTO `property_management_app`.`user_property` ( `user_id`, `property_id`, `is_manager`) VALUES ( 1 , 4, 1);

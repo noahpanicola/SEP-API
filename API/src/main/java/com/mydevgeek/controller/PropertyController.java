@@ -3,6 +3,7 @@ package com.mydevgeek.controller;
 import com.mydevgeek.domain.Property;
 import com.mydevgeek.repo.PropertyRepository;
 
+import com.mydevgeek.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
@@ -14,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.System.in;
 
 
 @RestController
@@ -23,6 +25,10 @@ public class PropertyController {
 
     @Autowired
     private PropertyRepository propertyRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
 
     /* FIND A PROPERTY BY ID */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -43,8 +49,13 @@ public class PropertyController {
     public List<Property> getPropertyByUserId(@RequestParam("uid") Long uid)
     {
     		List<Property> p = propertyRepository.findByUserId(uid);
-    		
-    		if(p.isEmpty()) return null; 
+
+
+    		for(Property pr : p) {
+                pr.setTenants(userRepository.findTenantsAtProperty(pr.getId()));
+            }
+
+    		if(p.isEmpty()) return null;
     		else return p;
     }
     

@@ -2,6 +2,8 @@ package com.mydevgeek.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "property")
@@ -32,7 +34,10 @@ public class Property implements Serializable {
 	
 	@Column(name = "coord_long")
 	private double longitude;
-	
+
+	@Transient
+	private List<User> tenants;
+
 	public Property() {
 		this.id = null;
 		this.streetAddress 	= null;
@@ -42,6 +47,7 @@ public class Property implements Serializable {
 		this.imgUrlThumb 	= null;
 		this.latitude		= 0.0;
 		this.longitude		= 0.0;
+		this.tenants = new ArrayList<User>();
 	}
 	
 	public Property(String addr, String state, String zip, String mainimg, String thumbimg, double lat, double lon) {
@@ -53,6 +59,8 @@ public class Property implements Serializable {
 		this.imgUrlThumb 	= thumbimg;
 		this.latitude 		= lat;
 		this.longitude 		= lon;
+		this.tenants		= new ArrayList<User>();
+
 	}
 	
 	public Long getId() {
@@ -118,5 +126,12 @@ public class Property implements Serializable {
 	public void setLongitude(double lon) {
 		this.longitude = lon;
 	}
-		
+
+	public List<User> getTenants() {
+		return tenants;
+	}
+
+	public void setTenants(List<User> tenants) {
+		this.tenants = tenants;
+	}
 }
