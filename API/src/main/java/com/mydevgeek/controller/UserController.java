@@ -23,12 +23,18 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    /*
+        GET USER BY ID
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public User getUserById(@PathVariable("id") Long id) {
         return userRepository.findOne(id);
     }
 
+    /*
+        GET USER USING THEIR EMAIL
+     */
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<User> getUserByEmail(@RequestParam("email") String email)
     {
@@ -38,27 +44,20 @@ public class UserController {
     }
 
 
+    /*
+        CREATING A NEW USER
+     */
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<User> registerUser(@RequestBody Map<String,String> payload) throws Exception {
     	
         //  Build a new user from the JSON
         java.sql.Date dateCreated = convertUtilToSql(new Date());
-        
+
         User newUser = new User();
         
         //return the user in JSON format and save in the database
         return ResponseEntity.accepted().body(userRepository.save(newUser));
     }
-    
-    /*@RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<User> loginUser(@RequestBody Map<String,String> payload) throws Exception {
-    		User u = new User();
-    		try {
-    			return u;
-    		} catch (Exception e) {
-    			return u;
-    		}
-    }*/
 
     private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
         java.sql.Date sDate = new java.sql.Date(uDate.getTime());
