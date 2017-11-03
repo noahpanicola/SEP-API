@@ -43,5 +43,5 @@ INSERT INTO `property_management_app`.`property` (  `street_address`,
 
 
 -- Assign properties to users
-INSERT INTO `property_management_app`.`user_property` ( `user_id`, `property_id`) VALUES ( 1 , 1);
-INSERT INTO `property_management_app`.`user_property` ( `user_id`, `property_id`) VALUES ( 1 , 2);
+INSERT INTO `property_management_app`.`user_property` ( `user_id`, `property_id`, `is_manager`) VALUES ( 1 , 1, 1);
+INSERT INTO `property_management_app`.`user_property` ( `user_id`, `property_id`, `is_manager`) VALUES ( 1 , 2, 1);

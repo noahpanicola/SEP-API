@@ -61,6 +61,7 @@ CREATE TABLE `user_property` (
   user_prop_id      SERIAL,
   user_id           BIGINT UNSIGNED NOT NULL,
   property_id       BIGINT UNSIGNED NOT NULL,
+  is_manager        TINYINT(1) NOT NULL DEFAULT 0,  --  Default to false
   PRIMARY KEY (user_prop_id),
   FOREIGN KEY (user_id) REFERENCES user(user_id),
   FOREIGN KEY (property_id) REFERENCES property(property_id)
