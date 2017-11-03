@@ -28,13 +28,16 @@ public class UserController {
     public User getUserById(@PathVariable("id") Long id) {
         return userRepository.findOne(id);
     }
-    
-    /*@RequestMapping(value = "/email={email}", method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.OK)
-    public User getUserbyEmail(@PathVariable("email") String email) {
-        return userRepository.findByEmail(email);
-    }*/
-    
+
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<User> getUserByEmail(@RequestParam("email") String email)
+    {
+        User u = userRepository.findByEmail(email);
+
+        return ResponseEntity.accepted().body(u);
+    }
+
+
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<User> registerUser(@RequestBody Map<String,String> payload) throws Exception {
     	
