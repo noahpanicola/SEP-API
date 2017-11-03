@@ -3,10 +3,13 @@ package com.mydevgeek.controller;
 import com.mydevgeek.domain.Property;
 import com.mydevgeek.repo.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.Repository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.hibernate.mapping.List;
+
+import java.util.List;
 
 
 
@@ -27,10 +30,9 @@ public class PropertyController {
     
     /* FIND A PROPERTY BY STATE */
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<List> getUserByEmail(@RequestParam("state") String state)
+    public List<Property> getUserByState(@RequestParam("state") String state)
     {
-        List p = propertyRepository.findByState(state);
-        return ResponseEntity.accepted().body(p);
+    		return propertyRepository.findByState(state);
     }
 
 }
