@@ -22,4 +22,5 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
 	
 	@Query(value = "SELECT * FROM property p WHERE p.property_id IN (SELECT pr.property_id FROM user_property pr WHERE pr.is_manager = 1 AND pr.user_id = :uid);", nativeQuery = true)
     public List<Property> findByUserId(@Param("uid") Long uid);
+	
 }

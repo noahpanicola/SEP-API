@@ -60,8 +60,8 @@ public class PropertyController {
         			Double.parseDouble(payload.get("longitude"))
         		);
         
+        //call userPropertyRepository and save a record to the db with the user and the property id here
         
-
         //return the user in JSON format and save in the database
         return ResponseEntity.accepted().body(propertyRepository.save(p));
     }
