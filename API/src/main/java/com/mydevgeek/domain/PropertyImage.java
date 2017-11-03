@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "property")
+@Table(name = "property_image")
 public class PropertyImage implements Serializable {
 	
 	@Id
