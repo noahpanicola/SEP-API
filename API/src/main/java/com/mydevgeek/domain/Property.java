@@ -1,5 +1,8 @@
 package com.mydevgeek.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ public class Property implements Serializable {
     private Long id;
 	
 	@Column(name = "street_address")
+	@JsonProperty(value = "street_address")
 	private String streetAddress;
 	
 	@Column(name = "state")
@@ -24,12 +28,15 @@ public class Property implements Serializable {
 	private String zip;
 	
 	@Column(name = "image_url_main")
+	@JsonProperty(value = "image_url_main")
 	private String imgUrlMain;
 	
 	@Column(name = "image_url_thumb")
+	@JsonProperty(value = "image_url_thumbnail")
 	private String imgUrlThumb;
 	
 	@Column(name = "coord_lat")
+
 	private double latitude;
 	
 	@Column(name = "coord_long")

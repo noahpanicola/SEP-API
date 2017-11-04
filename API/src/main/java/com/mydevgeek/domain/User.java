@@ -1,5 +1,7 @@
 package com.mydevgeek.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -25,21 +27,27 @@ public class User implements Serializable{
     private Long id;
 
     @Column(name = "first_name")
+    @JsonProperty(value = "first_name")
     private String firstName;
 
     @Column(name = "last_name")
+    @JsonProperty(value = "last_name")
     private String lastName;
     
     @Column(name = "email")
     private String email;
     
     @Column(name = "image_url_main")
+    @JsonProperty(value = "image_url_main")
     private String profileImage;
 
     @Column(name = "image_url_thumb")
+    @JsonProperty(value = "image_url_thumb")
     private String profileImageThumbnail;
 
     @Column(name = "password")
+    @JsonIgnore
+    @JsonProperty(value = "password")
     private char[] password;
 
     
