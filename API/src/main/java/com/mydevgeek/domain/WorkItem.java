@@ -18,24 +18,31 @@ public class WorkItem implements Serializable{
     private Long id;
 	
 	@Column(name = "property_id")
+	@JsonProperty(value = "property_id")
 	private Long propertyId;
 	
 	@Column(name = "date_created")
+	@JsonProperty(value = "date_created")
 	private String dateCreated;
 	
 	@Column(name = "is_accepted")
+	@JsonProperty(value = "is_accepted")
 	private boolean isAccepted;
 	
 	@Column(name = "description")
+	@JsonProperty(value = "description")
 	private String description;
 	
 	@Column(name = "time_scheduled")
+	@JsonProperty(value = "time_scheduled")
 	private String timeScheduled;
 	
 	@Column(name = "estimated_time")
+	@JsonProperty(value = "estimated_time")
 	private String estimatedTime;
 	
 	@Column(name = "fee")
+	@JsonProperty(value = "fee")
 	private double fee;
 	
 	public WorkItem() {
@@ -58,6 +65,10 @@ public class WorkItem implements Serializable{
 		this.timeScheduled = ts;
 		this.estimatedTime = et;
 		this.fee = fee;
+	}
+	
+	public Long getId() {
+		return this.id;
 	}
 	
 	public Long getPropertyId() {
