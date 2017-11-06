@@ -10,6 +10,7 @@ import org.springframework.data.repository.Repository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Date;
 import java.util.List;
@@ -45,8 +46,8 @@ public class PropertyController {
     }
     
     /* FIND A PROPERTY BY USER ID */
-    @RequestMapping(value = "/user", method = RequestMethod.GET, produces = "application/json")
-    public List<Property> getPropertyByUserId(@RequestParam("uid") Long uid)
+    @RequestMapping(value = "/uid={uid}", method = RequestMethod.GET, produces = "application/json")
+    public List<Property> getPropertyByUserId(@PathVariable("uid") Long uid)
     {
     		List<Property> p = propertyRepository.findByUserId(uid);
 
