@@ -52,8 +52,8 @@ public class User implements Serializable{
 
     
     //CONSTRUCTORS
-    public User(Long id, String firstName, String lastName, String email, String profileImage, String profileImageThumbnail, char[] password) {
-        this.id = id;
+    public User(String firstName, String lastName, String email, String profileImage, String profileImageThumbnail, char[] password) {
+        this.id = null;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -63,25 +63,21 @@ public class User implements Serializable{
     }
 
     public User() {
-
-        this.firstName 		        = null;
-        this.lastName   		    = null;
-        this.password   		    = null;
-        this.email 			        = null;
-        this.profileImage 	        = null;
-        this.profileImageThumbnail  = null;
+    		this.id = null;
+        this.firstName = null;
+        this.lastName = null;
+        this.password = null;
+        this.email = null;
+        this.profileImage = null;
+        this.profileImageThumbnail = null;
     }
 
     public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        return this.id;
     }
 
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
 
     public void setFirstName(String firstName) {
@@ -89,7 +85,7 @@ public class User implements Serializable{
     }
 
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
 
     public void setLastName(String lastName) {
@@ -97,7 +93,7 @@ public class User implements Serializable{
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -105,7 +101,7 @@ public class User implements Serializable{
     }
 
     public String getProfileImage() {
-        return profileImage;
+        return this.profileImage;
     }
 
     public void setProfileImage(String profileImage) {
@@ -113,7 +109,7 @@ public class User implements Serializable{
     }
 
     public String getProfileImageThumbnail() {
-        return profileImageThumbnail;
+        return this.profileImageThumbnail;
     }
 
     public void setProfileImageThumbnail(String profileImageThumbnail) {
@@ -121,7 +117,7 @@ public class User implements Serializable{
     }
 
     public char[] getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(char[] password) {

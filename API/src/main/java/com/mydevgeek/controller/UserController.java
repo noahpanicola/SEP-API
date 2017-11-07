@@ -2,6 +2,9 @@ package com.mydevgeek.controller;
 
 import com.mydevgeek.domain.User;
 import com.mydevgeek.repo.UserRepository;
+import com.mydevgeek.domain.UserProperty;
+import com.mydevgeek.repo.UserPropertyRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +25,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private UserPropertyRepository userPropertyRepository;
 
     /*
         GET USER BY ID
@@ -39,24 +45,47 @@ public class UserController {
     public ResponseEntity<User> getUserByEmail(@RequestParam("email") String email)
     {
         User u = userRepository.findByEmail(email);
-
         return ResponseEntity.accepted().body(u);
     }
 
-
     /*
-        CREATING A NEW USER
-     */
+        CREATING A NEW MANAGER WITHOUT A PROPERTY
+     */  
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<User> registerUser(@RequestBody Map<String,String> payload) throws Exception {
-    	
-        //  Build a new user from the JSON
-        java.sql.Date dateCreated = convertUtilToSql(new Date());
+    public ResponseEntity<User> createUserWithProperty (@RequestBody Map<String,String> payload, @RequestParam("invite") boolean invite) throws Exception {
+    		if(invite == true) {
+    			//create a new user with a property
+	    		User newUser = new User();
+	    		newUser.setEmail(payload.get("email"));
+	    		newUser.setPassword("none".toCharArray());
+	    		
+	    		if(!payload.get("first_name").isEmpty()) { newUser.setFirstName(payload.get("first_name")); }
+	    		if(!payload.get("last_name").isEmpty()) { newUser.setLastName(payload.get("last_name")); }
+	   
+	    		newUser = userRepository.save(newUser);
+	    		
+	    		UserProperty up = new UserProperty();
+	    		up.setIsManager(Boolean.parseBoolean(payload.get("is_manager")));
+	    		up.setPropertyId(Long.parseLong(payload.get("property_id")));
+	    		up.setUserId(newUser.getId());
+	    		
+	    		//save new user_property and return the new user
+	    		userPropertyRepository.save(up);
+	    		return ResponseEntity.accepted().body(newUser);
+    			
+    		} else {
+    			User newUser = new User(payload.get("first_name"),		// first name
+						payload.get("last_name"),					// last name
+						payload.get("email"),						// email
+						null,										// profile image
+						null,										// profile thumbnail
+						payload.get("password").toCharArray() 		// password
+    					);
 
-        User newUser = new User();
-
-        //return the user in JSON format and save in the database
-        return ResponseEntity.accepted().body(userRepository.save(newUser));
+    			//return the user in JSON format and save in the database
+    			newUser = userRepository.save(newUser);
+    			return ResponseEntity.accepted().body(newUser);
+    		} 
     }
 
     private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
