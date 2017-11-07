@@ -49,18 +49,21 @@ public class UserController {
     }
 
     /*
-        CREATING A NEW MANAGER WITHOUT A PROPERTY
+        CREATING A NEW USER WITH OR WITHOUT A PROPERTY ATTACHED
      */  
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<User> createUserWithProperty (@RequestBody Map<String,String> payload, @RequestParam("invite") boolean invite) throws Exception {
     		if(invite == true) {
-    			//create a new user with a property
+    			//check if the necessary fields are provided
+    			if(payload.get("email") == null || payload.get("property_id") == null || payload.get("is_manager") == null) {
+    				return ResponseEntity.badRequest().body(new User());
+    			}
+    			//create a new user with a user_property attached
 	    		User newUser = new User();
 	    		newUser.setEmail(payload.get("email"));
-	    		newUser.setPassword("none".toCharArray());
 	    		
-	    		if(!payload.get("first_name").isEmpty()) { newUser.setFirstName(payload.get("first_name")); }
-	    		if(!payload.get("last_name").isEmpty()) { newUser.setLastName(payload.get("last_name")); }
+	    		if(payload.get("first_name") != null) { newUser.setFirstName(payload.get("first_name")); }
+	    		if(payload.get("last_name") != null) { newUser.setLastName(payload.get("last_name")); }
 	   
 	    		newUser = userRepository.save(newUser);
 	    		
@@ -74,13 +77,15 @@ public class UserController {
 	    		return ResponseEntity.accepted().body(newUser);
     			
     		} else {
-    			User newUser = new User(payload.get("first_name"),		// first name
-						payload.get("last_name"),					// last name
-						payload.get("email"),						// email
-						null,										// profile image
-						null,										// profile thumbnail
-						payload.get("password").toCharArray() 		// password
-    					);
+    			//check if the necessary fields are provided
+    			if(payload.get("email") == null || payload.get("first_name") == null || payload.get("last_name") == null || payload.get("password") == null) {
+    				return ResponseEntity.badRequest().body(new User());
+    			}
+    			User newUser = new User();
+    			newUser.setFirstName(payload.get("first_name"));
+			newUser.setLastName(payload.get("last_name"));
+			newUser.setEmail(payload.get("email"));			
+			newUser.setPassword(payload.get("password").toCharArray());
 
     			//return the user in JSON format and save in the database
     			newUser = userRepository.save(newUser);
