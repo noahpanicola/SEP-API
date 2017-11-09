@@ -9,6 +9,9 @@ import com.mydevgeek.domain.User;
 import com.mydevgeek.domain.UserProperty;
 import com.mydevgeek.repo.UserPropertyRepository;
 
+import com.mydevgeek.domain.Setting;
+import com.mydevgeek.repo.SettingRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
@@ -36,13 +39,27 @@ public class PropertyController {
     
     @Autowired
     private UserPropertyRepository userPropertyRepository;
+    
+    @Autowired
+    private SettingRepository settingRepository;
 
 
     /* FIND A PROPERTY BY ID */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public Property getUserById(@PathVariable("id") Long id) {
-        return propertyRepository.findOne(id);
+    	
+    		Property p = propertyRepository.findOne(id);
+    	
+    		Setting apiKey = settingRepository.findByCategoryAndName("GoogleMaps", "ApiKey");
+		Setting googleRoot = settingRepository.findByCategoryAndName("GoogleMaps", "RootUrl");
+		
+		String key = apiKey.getValue();
+		String rootUrl = googleRoot.getValue();
+		
+		p.setLatitudeAndLongitudeWithAddress(rootUrl, key);
+    		
+        return p;
     }
     
     /* FIND A PROPERTY BY STATE */
@@ -90,8 +107,13 @@ public class PropertyController {
         		p.setLatitude(Double.parseDouble(payload.get("coord_lat")));
         		p.setLongitude(Double.parseDouble(payload.get("coord_long")));
         } else {
-        		//p.getLatitudeFromAddress();
-        		//p.getLongitudeFromAddress();
+        		Setting apiKey = settingRepository.findByCategoryAndName("GoogleMaps", "ApiKey");
+        		Setting googleRoot = settingRepository.findByCategoryAndName("GoogleMaps", "RootUrl");
+        		
+        		String key = apiKey.getValue();
+        		String rootUrl = googleRoot.getValue();
+        		
+        		p.setLatitudeAndLongitudeWithAddress(rootUrl, key);
         }
         
         //save the new property
@@ -132,5 +154,7 @@ public class PropertyController {
     		if(count > 0) return ResponseEntity.accepted().body(propertyRepository.save(p));
     		else return ResponseEntity.accepted().body("No fields have been updated");
     }
+    
+    
 
 }

@@ -70,6 +70,16 @@ public class Property implements Serializable {
 
 	}
 	
+	public Double setLatitudeAndLongitudeWithAddress(String rootUrl, String key) {
+		//check if required values are set
+		if(this.streetAddress == null || this.zip == null || this.state == null) return 0.0;
+		
+		System.out.println("******** ROOT URL: " + rootUrl);
+		System.out.println("******** API KEY: " + key);
+		
+		return this.latitude;
+	}
+	
 	public Long getId() {
 		return this.id;
 	}
