@@ -160,8 +160,8 @@ CREATE TABLE `log` (
 CREATE TABLE `settings` (
   setting_id        SERIAL,
   category          VARCHAR(30),
-  name              VARCHAR(30),
-  value             VARCHAR(30),
+  name              VARCHAR(40),
+  value             VARCHAR(200),
   PRIMARY KEY (setting_id)
 );
 
