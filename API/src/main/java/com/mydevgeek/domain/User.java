@@ -47,7 +47,6 @@ public class User implements Serializable{
 
     @Column(name = "password")
     @JsonIgnore
-    @JsonProperty(value = "password")
     private char[] password;
 
     

@@ -92,9 +92,32 @@ public class UserController {
     			return ResponseEntity.accepted().body(newUser);
     		} 
     }
+    
+    /* UPDATING A USER'S INFORMATION */
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = "application/json")
+    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody Map<String,String> payload){
+    		
+    		int count = 0;
+    	
+    		//find the correct user
+    		User u = userRepository.findOne(id);
+    		if(u == null) return ResponseEntity.accepted().body("User not found.");
+    		
+    		//update fields if they are provided
+    		if(payload.get("first_name") != null) { u.setFirstName(payload.get("first_name")); count++; }
+    		if(payload.get("last_name") != null) { u.setLastName(payload.get("last_name")); count++; }
+    		if(payload.get("email") != null) { u.setEmail(payload.get("email")); count++; }
+    		if(payload.get("password") != null) { u.setPassword(payload.get("password").toCharArray()); count ++; }
+    		if(payload.get("image_url_main") != null) { u.setProfileImage(payload.get("image_url_main")); count ++; }
+    		if(payload.get("image_url_thumb") != null) { u.setProfileImageThumbnail(payload.get("image_url_thumb")); count ++; }
+    		
+    		if(count > 0) return ResponseEntity.accepted().body(userRepository.save(u));
+    		else return ResponseEntity.accepted().body("No fields populated.");
+    		
+    }
 
-    private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
+    /*private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
         java.sql.Date sDate = new java.sql.Date(uDate.getTime());
         return sDate;
-    }
+    }*/
 }
