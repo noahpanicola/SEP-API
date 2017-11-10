@@ -48,14 +48,22 @@ public class PropertyController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public Property getUserById(@PathVariable("id") Long id) {
-    		return propertyRepository.findOne(id);
+    		Property p = propertyRepository.findOne(id);
+    		p.setTenants(userRepository.findTenantsAtProperty(p.getId()));
+    		return p;
     }
     
     /* FIND A PROPERTY BY STATE */
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public List<Property> getPropertyByState(@RequestParam("state") String state)
     {
-    		return propertyRepository.findByState(state);
+    		List<Property> p = propertyRepository.findByState(state);
+    		for(Property pr : p) {
+                pr.setTenants(userRepository.findTenantsAtProperty(pr.getId()));
+            }
+
+    		if(p.isEmpty()) return null;
+    		else return p;
     }
     
     /* FIND A PROPERTY BY USER ID */

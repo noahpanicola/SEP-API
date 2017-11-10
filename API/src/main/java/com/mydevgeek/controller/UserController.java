@@ -2,6 +2,9 @@ package com.mydevgeek.controller;
 
 import com.mydevgeek.domain.Invite;
 import com.mydevgeek.domain.User;
+import com.mydevgeek.domain.Setting;
+
+import com.mydevgeek.repo.SettingRepository;
 import com.mydevgeek.repo.UserRepository;
 import com.mydevgeek.domain.UserProperty;
 import com.mydevgeek.repo.UserPropertyRepository;
@@ -29,6 +32,8 @@ public class UserController {
     
     @Autowired
     private UserPropertyRepository userPropertyRepository;
+    
+    @Autowired SettingRepository settingRepository;
 
     /*
         GET USER BY ID
@@ -84,12 +89,15 @@ public class UserController {
 	    		
 	    		//create a temporary user to send the email from
 	    		User sender = new User();
-	    		sender.setEmail("noahpanicola@gmail.com");
-	    		sender.setFirstName("Noah");
-	    		sender.setLastName("Panicola");
+	    		sender.setFirstName("Property Guy");
+	    		sender.setLastName("Manager");
+	    		
+	    		//get the email information
+	    		Setting gmail = settingRepository.findByCategoryAndName("Gmail", "Email");
+	    		Setting pass = settingRepository.findByCategoryAndName("Gmail", "Password");
 	    		
 	    		//create the invitation
-	    		Invite inv = new Invite(newUser, sender, "This is a test invite.\n", "noahpanicola@gmail.com");
+	    		Invite inv = new Invite(newUser, sender, "This is a test invite.\n", gmail.getValue(), pass.getValue());
 	    		inv.addLine("From,");
 	    		inv.addLine("The Property Management People");
 	    		

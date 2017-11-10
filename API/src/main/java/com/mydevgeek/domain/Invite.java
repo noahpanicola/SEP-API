@@ -16,6 +16,7 @@ public class Invite {
 	private String message;
 	private String to;
 	private String from;
+	private String password;
 	
 	private boolean success;
 	
@@ -25,12 +26,13 @@ public class Invite {
 		setDefaults();
 	}
 	
-	public Invite(User r, User s, String msg, String from) {
+	public Invite(User r, User s, String msg, String from, String pw) {
 		setDefaults();
 		this.rec = r;
 		this.sender = s;
 		this.message = msg;
 		this.from = from;
+		this.password = pw;
 		this.to = r.getEmail();
 	}
 	
@@ -39,14 +41,13 @@ public class Invite {
 	public void send() {
 		
 		//make sure necessary fields are populated
-		if(this.to.isEmpty() || this.from.isEmpty() || this.rec.getEmail() == null) {
+		if(this.to.isEmpty() || this.from.isEmpty() || this.rec.getEmail() == null || this.password.isEmpty()) {
 			System.out.println("Required fields are not sent to send email.");
 			this.success = false;
 			return;
 		}
 		
-		// Get system properties
-	    Properties properties = System.getProperties();
+		// Set SSL FACTORY
 	    final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
 	    
 	    // Get a Properties object
@@ -60,8 +61,8 @@ public class Invite {
         props.put("mail.debug", "true");
         props.put("mail.store.protocol", "pop3");
         props.put("mail.transport.protocol", "smtp");
-        final String username = "GMAIL ACCOUNT HERE"; 	//MUST TURN SETTING 'Allow Less Secure Apps: ON' in the gmail account
-        final String password = "PASSWORD HERE";
+        final String username = this.from; 	//MUST TURN SETTING 'Allow Less Secure Apps: ON' in the gmail account
+        final String password = this.password;
 	    
 	    try {
 	    	
@@ -142,6 +143,10 @@ public class Invite {
 	
 	public boolean getSuccess() {
 		return this.success;
+	}
+	
+	public void setPassword(String pw) {
+		this.password = pw;
 	}
 	
 	/* PRIVATE METHODS */
