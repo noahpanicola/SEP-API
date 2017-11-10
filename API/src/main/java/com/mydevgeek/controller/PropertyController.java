@@ -87,11 +87,7 @@ public class PropertyController {
         p.setStreetAddress(payload.get("street_address"));
         p.setState(payload.get("state"));
         p.setZip(payload.get("zip"));
-        
-        //set optional properties if they are provided
-        if(payload.get("image_url_main") != null) p.setImgUrlMain(payload.get("img_url_main"));
-        if(payload.get("image_url_thumb") != null) p.setImgUrlThumb(payload.get("img_url_thumb"));
-        
+
         //get latitude and longitude from google's API if it is not provided
         if(payload.get("coord_lat") != null && payload.get("coord_long") != null) { 
         		p.setLatitude(Double.parseDouble(payload.get("coord_lat")));
@@ -104,6 +100,17 @@ public class PropertyController {
         		String rootUrl = googleRoot.getValue();
         		
         		p.setLatitudeAndLongitudeWithAddress(rootUrl, key);
+        }
+        
+        //set optional image properties if they aren't provided
+        if(payload.get("image_url_main") == null) {
+        		Setting apiKey = settingRepository.findByCategoryAndName("GoogleMaps", "ApiKey");
+        		Setting rootUrl = settingRepository.findByCategoryAndName("GoogleStreetView", "RootUrl");
+        		
+        		p.setDefaultStreetViewImage(rootUrl.getValue(), apiKey.getValue(), "600x300");
+        } else {
+        		//set the provided image URL if there is one
+        		p.setImgUrlMain(payload.get("image_url_main"));
         }
         
         //save the new property

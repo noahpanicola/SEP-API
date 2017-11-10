@@ -120,6 +120,22 @@ public class Property implements Serializable {
 		
 	}
 	
+	public void setDefaultStreetViewImage(String rootUrl, String key, String size) {
+		//check to see if the necessary values have been set
+		if(this.latitude == 0.0 || this.longitude == 0.0) return;
+		
+		//sets the URL in the database to the default google street view image
+		this.imgUrlMain = rootUrl + "size=" + size
+				+ "&location=" + this.latitude + "," + this.longitude
+				+ "&key=" + key;
+		
+		this.imgUrlThumb = rootUrl + "size=40x40"
+				+ "&location=" + this.latitude + "," + this.longitude
+				+ "&key=" + key;
+		
+		System.out.println(this.imgUrlMain);
+	}
+	
 	public Long getId() {
 		return this.id;
 	}
