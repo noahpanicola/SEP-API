@@ -49,17 +49,7 @@ public class PropertyController {
     @ResponseStatus(HttpStatus.OK)
     public Property getUserById(@PathVariable("id") Long id) {
     	
-    		Property p = propertyRepository.findOne(id);
-    	
-    		Setting apiKey = settingRepository.findByCategoryAndName("GoogleMaps", "ApiKey");
-		Setting googleRoot = settingRepository.findByCategoryAndName("GoogleMaps", "RootUrl");
-		
-		String key = apiKey.getValue();
-		String rootUrl = googleRoot.getValue();
-		
-		p.setLatitudeAndLongitudeWithAddress(rootUrl, key);
-    		
-        return p;
+    		return propertyRepository.findOne(id);
     }
     
     /* FIND A PROPERTY BY STATE */

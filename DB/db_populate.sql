@@ -77,6 +77,6 @@ INSERT INTO `property_management_app`.`user_property` ( `user_id`, `property_id`
 INSERT INTO `property_management_app`.`user_property` ( `user_id`, `property_id`, `is_manager`) VALUES ( 1 , 4, 1);
 
 -- Populate Settings with necessary information for app to run
-INSERT INTO `property_management_app`.`settings` (`category`, `name`, `value`) VALUES ('GoogleMaps', 'ApiKey', 'AIzaSyArUtQP9qjYB9nDrQ5zTEqaWI');
+INSERT INTO `property_management_app`.`settings` (`category`, `name`, `value`) VALUES ('GoogleMaps', 'ApiKey', 'AIzaSyArUtQP9qjYB9nDrQ5zTEqaWIKc1yhXV0g');
 INSERT INTO `property_management_app`.`settings` (`category`, `name`, `value`) VALUES ('GoogleMaps', 'RootUrl', 'https://maps.googleapis.com/maps/api/geocode/json?');
 INSERT INTO `property_management_app`.`settings` (`category`, `name`, `value`) VALUES ('Main', 'RootUrl', 'http://localhost:8080');

@@ -3,6 +3,15 @@ package com.mydevgeek.domain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
+
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.ParseException;
+import org.json.simple.parser.JSONParser;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -70,14 +79,45 @@ public class Property implements Serializable {
 
 	}
 	
-	public Double setLatitudeAndLongitudeWithAddress(String rootUrl, String key) {
+	public void setLatitudeAndLongitudeWithAddress(String rootUrl, String key) {
 		//check if required values are set
-		if(this.streetAddress == null || this.zip == null || this.state == null) return 0.0;
+		if(this.streetAddress == null || this.zip == null || this.state == null) return;
 		
-		System.out.println("******** ROOT URL: " + rootUrl);
-		System.out.println("******** API KEY: " + key);
+		Client client = Client.create();
+		WebResource webResource = client.resource(rootUrl);
 		
-		return this.latitude;
+		MultivaluedMapImpl queryParams = new MultivaluedMapImpl();
+		queryParams.add("address", this.streetAddress + "," + this.state + "," + this.zip);
+		queryParams.add("key", key);
+		
+		String response = webResource.queryParams(queryParams).get(String.class);
+		System.out.println("******** API RESPONSE: \n" + response);
+		
+		JSONParser parser = new JSONParser();
+		try{
+			//parse the JSON
+			Object obj = parser.parse(response);
+			JSONObject resp = (JSONObject) obj;
+			JSONArray res = (JSONArray) resp.get("results");
+			
+			JSONObject body = (JSONObject) res.get(0);
+			JSONObject geo = (JSONObject) body.get("geometry");
+			JSONObject loc = (JSONObject) geo.get("location");
+			
+			Double lat = (Double) loc.get("lat");
+			Double lng = (Double) loc.get("lng");
+			
+			//set the new latitude and longitude
+			this.latitude = lat;
+			this.longitude = lng;
+			
+		} catch (ParseException pe) {
+			//print out the error
+			System.out.println("position: " + pe.getPosition());
+	        	System.out.println(pe);
+		}
+		
+		
 	}
 	
 	public Long getId() {
