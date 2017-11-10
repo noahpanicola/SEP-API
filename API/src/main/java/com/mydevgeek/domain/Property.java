@@ -30,6 +30,9 @@ public class Property implements Serializable {
 	@JsonProperty(value = "street_address")
 	private String streetAddress;
 	
+	@Column(name = "city")
+	private String city;
+	
 	@Column(name = "state")
 	private String state;
 	
@@ -57,37 +60,39 @@ public class Property implements Serializable {
 	public Property() {
 		this.id = null;
 		this.streetAddress 	= null;
+		this.city 			= null;
 		this.state 			= null;
 		this.zip 			= null;
 		this.imgUrlMain 		= null;
 		this.imgUrlThumb 	= null;
 		this.latitude		= 0.0;
 		this.longitude		= 0.0;
-		this.tenants = new ArrayList<User>();
+		this.tenants			= new ArrayList<User>();
 	}
 	
-	public Property(String addr, String state, String zip, String mainimg, String thumbimg, double lat, double lon) {
+	public Property(String addr, String city, String state, String zip, String mainimg, String thumbimg, double lat, double lon) {
 		this.id 				= null;
 		this.streetAddress 	= addr;
+		this.city			= city;
 		this.state 			= state;
 		this.zip 			= zip;
 		this.imgUrlMain 		= mainimg;
 		this.imgUrlThumb 	= thumbimg;
 		this.latitude 		= lat;
 		this.longitude 		= lon;
-		this.tenants		= new ArrayList<User>();
+		this.tenants			= new ArrayList<User>();
 
 	}
 	
 	public void setLatitudeAndLongitudeWithAddress(String rootUrl, String key) {
 		//check if required values are set
-		if(this.streetAddress == null || this.zip == null || this.state == null) return;
+		if(this.streetAddress == null || this.zip == null || this.state == null || this.city == null) return;
 		
 		Client client = Client.create();
 		WebResource webResource = client.resource(rootUrl);
 		
 		MultivaluedMapImpl queryParams = new MultivaluedMapImpl();
-		queryParams.add("address", this.streetAddress + "," + this.state + "," + this.zip);
+		queryParams.add("address", this.streetAddress + "," + this.city + "," + this.state + "," + this.zip);
 		queryParams.add("key", key);
 		
 		String response = webResource.queryParams(queryParams).get(String.class);
@@ -129,7 +134,7 @@ public class Property implements Serializable {
 				+ "&location=" + this.latitude + "," + this.longitude
 				+ "&key=" + key;
 		
-		this.imgUrlThumb = rootUrl + "size=40x40"
+		this.imgUrlThumb = rootUrl + "size=100x100"
 				+ "&location=" + this.latitude + "," + this.longitude
 				+ "&key=" + key;
 		
@@ -150,6 +155,14 @@ public class Property implements Serializable {
 	
 	public void setStreetAddress(String str) {
 		this.streetAddress = str;
+	}
+	
+	public String getCity() {
+		return this.city;
+	}
+	
+	public void setCity(String city) {
+		this.city = city;
 	}
 	
 	public String getState() {

@@ -48,7 +48,6 @@ public class PropertyController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public Property getUserById(@PathVariable("id") Long id) {
-    	
     		return propertyRepository.findOne(id);
     }
     
@@ -79,12 +78,13 @@ public class PropertyController {
     public ResponseEntity<?> addProperty(@RequestBody Map<String,String> payload, @RequestParam("uid") Long uid) throws Exception {
     	
     		//return an error if the incorrect parameters are supplied
-    		if(payload.get("street_address") == null || payload.get("state") == null || payload.get("zip") == null)
+    		if(payload.get("street_address") == null || payload.get("state") == null || payload.get("zip") == null || payload.get("city") == null)
     			return ResponseEntity.accepted().body("Incorrect parameters supplied.");
     		
     		//create a new property and populate it
         Property p = new Property();
         p.setStreetAddress(payload.get("street_address"));
+        p.setCity(payload.get("city"));
         p.setState(payload.get("state"));
         p.setZip(payload.get("zip"));
 
@@ -140,6 +140,7 @@ public class PropertyController {
     		
     		//update the property values if they exist
     		if(payload.get("street_address") != null) { p.setStreetAddress(payload.get("street_address")); count++; }
+    		if(payload.get("city") != null) { p.setCity(payload.get("city")); count++; }
     		if(payload.get("state") != null) { p.setState(payload.get("state")); count++; }
     		if(payload.get("zip") != null) { p.setZip(payload.get("zip")); count++; }
     		if(payload.get("image_url_main") != null) { p.setImgUrlMain(payload.get("image_url_main")); count++; }

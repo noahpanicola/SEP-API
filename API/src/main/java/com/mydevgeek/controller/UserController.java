@@ -1,5 +1,6 @@
 package com.mydevgeek.controller;
 
+import com.mydevgeek.domain.Invite;
 import com.mydevgeek.domain.User;
 import com.mydevgeek.repo.UserRepository;
 import com.mydevgeek.domain.UserProperty;
@@ -58,15 +59,21 @@ public class UserController {
     			if(payload.get("email") == null || payload.get("property_id") == null || payload.get("is_manager") == null) {
     				return ResponseEntity.badRequest().body(new User());
     			}
+    			
     			//create a new user with a user_property attached
 	    		User newUser = new User();
 	    		newUser.setEmail(payload.get("email"));
 	    		
+	    		//populate optional fields
 	    		if(payload.get("first_name") != null) { newUser.setFirstName(payload.get("first_name")); }
 	    		if(payload.get("last_name") != null) { newUser.setLastName(payload.get("last_name")); }
-	   
+	    		if(payload.get("image_url_main") != null) { newUser.setProfileImage(payload.get("image_url_main")); }
+	    		if(payload.get("image_url_thumb") != null) { newUser.setProfileImageThumbnail(payload.get("image_url_thumb")); }
+	    		
+	    		//save the new user to the database and get the id back
 	    		newUser = userRepository.save(newUser);
 	    		
+	    		//create a user property association to the new user
 	    		UserProperty up = new UserProperty();
 	    		up.setIsManager(Boolean.parseBoolean(payload.get("is_manager")));
 	    		up.setPropertyId(Long.parseLong(payload.get("property_id")));
@@ -74,6 +81,21 @@ public class UserController {
 	    		
 	    		//save new user_property and return the new user
 	    		userPropertyRepository.save(up);
+	    		
+	    		//create a temporary user to send the email from
+	    		User sender = new User();
+	    		sender.setEmail("noahpanicola@gmail.com");
+	    		sender.setFirstName("Noah");
+	    		sender.setLastName("Panicola");
+	    		
+	    		//create the invitation
+	    		Invite inv = new Invite(newUser, sender, "This is a test invite.\n", "noahpanicola@gmail.com");
+	    		inv.addLine("From,");
+	    		inv.addLine("The Property Management People");
+	    		
+	    		//send the invitation
+	    		inv.send();
+	    		
 	    		return ResponseEntity.accepted().body(newUser);
     			
     		} else {
@@ -81,11 +103,17 @@ public class UserController {
     			if(payload.get("email") == null || payload.get("first_name") == null || payload.get("last_name") == null || payload.get("password") == null) {
     				return ResponseEntity.badRequest().body(new User());
     			}
+    			
+    			//populate the user with required fields
     			User newUser = new User();
     			newUser.setFirstName(payload.get("first_name"));
 			newUser.setLastName(payload.get("last_name"));
 			newUser.setEmail(payload.get("email"));			
 			newUser.setPassword(payload.get("password").toCharArray());
+			
+			//populate user with optional fields
+			if(payload.get("image_url_main") != null) { newUser.setProfileImage(payload.get("image_url_main")); }
+    			if(payload.get("image_url_thumb") != null) { newUser.setProfileImageThumbnail(payload.get("image_url_thumb")); }
 
     			//return the user in JSON format and save in the database
     			newUser = userRepository.save(newUser);
