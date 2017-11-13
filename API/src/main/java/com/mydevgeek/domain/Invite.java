@@ -15,6 +15,7 @@ public class Invite {
 	
 	private String message;
 	private String to;
+	private String key;
 	private String from;
 	private String password;
 	
@@ -94,6 +95,7 @@ public class Invite {
 	         
 	    } catch (MessagingException mex) {
 	         mex.printStackTrace();
+	         this.success = false;
 	    }
 	}
 	
@@ -149,6 +151,10 @@ public class Invite {
 		this.password = pw;
 	}
 	
+	public String getKey() {
+		return this.key;
+	}
+	
 	/* PRIVATE METHODS */
 	
 	private void setDefaults() {
@@ -157,6 +163,21 @@ public class Invite {
 		this.message = "";
 		this.from = "";
 		this.success = false;
+		
+        // Generate the key for the user to sign in for the first time
+        this.key = generateKey();
+	}
+	
+	private String generateKey() {
+		String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 18) { //length of the string is 18
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
 	}
 	
 }

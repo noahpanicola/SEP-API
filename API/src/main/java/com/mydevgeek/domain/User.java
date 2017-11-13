@@ -8,10 +8,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
-
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.impl.crypto.MacProvider;
 import java.security.Key;
 
 /**
@@ -44,15 +40,20 @@ public class User implements Serializable{
     @Column(name = "image_url_thumb")
     @JsonProperty(value = "image_url_thumb")
     private String profileImageThumbnail;
+    
+    @Column(name = "verification_key")
+    @JsonIgnore
+    private String verificationKey;
 
     @Column(name = "password")
     @JsonIgnore
     private char[] password;
 
     
-    //CONSTRUCTORS
+    /* CONSTRUCTORS */
+    
     public User(String firstName, String lastName, String email, String profileImage, String profileImageThumbnail, char[] password) {
-        this.id = null;
+    		setDefaults();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -62,15 +63,11 @@ public class User implements Serializable{
     }
 
     public User() {
-    		this.id = null;
-        this.firstName = null;
-        this.lastName = null;
-        this.password = null;
-        this.email = null;
-        this.profileImage = null;
-        this.profileImageThumbnail = null;
+    		setDefaults();
     }
 
+    	/* PUBLIC METHODS */
+    
     public Long getId() {
         return this.id;
     }
@@ -114,6 +111,14 @@ public class User implements Serializable{
     public void setProfileImageThumbnail(String profileImageThumbnail) {
         this.profileImageThumbnail = profileImageThumbnail;
     }
+    
+    public String getVerificationKey() {
+    		return this.verificationKey;
+    }
+    
+    public void setVerificationKey(String vk) {
+    		this.verificationKey = vk;
+    }
 
     public char[] getPassword() {
         return this.password;
@@ -122,5 +127,18 @@ public class User implements Serializable{
     public void setPassword(char[] password) {
         this.password = password;
     }
+    
+    /* PRIVATE METHODS */
+    
+    private void setDefaults() {
+    		this.id = null;
+    		this.firstName = null;
+    		this.lastName = null;
+    		this.password = null;
+    		this.email = null;
+    		this.profileImage = null;
+    		this.profileImageThumbnail = null;
+    		this.verificationKey = null;
+}
 
 }

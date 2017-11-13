@@ -23,6 +23,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import static java.lang.System.in;
 
 
@@ -47,7 +49,7 @@ public class PropertyController {
     /* FIND A PROPERTY BY ID */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public Property getUserById(@PathVariable("id") Long id) {
+    public Property getUserById(@PathVariable("id") Long id, HttpServletRequest request) {
     		Property p = propertyRepository.findOne(id);
     		p.setTenants(userRepository.findTenantsAtProperty(p.getId()));
     		return p;
