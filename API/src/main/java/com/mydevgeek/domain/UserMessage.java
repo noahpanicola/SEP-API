@@ -12,7 +12,7 @@ import javax.persistence.Transient;
 
 import com.mydevgeek.domain.User;
 import com.mydevgeek.domain.Message;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -24,15 +24,15 @@ public class UserMessage implements Serializable {
     private Long id;
 	
 	@Column(name = "sender_id")
-	@JsonProperty(value = "sender_id")
+	@JsonIgnore
 	private Long senderId;
 	
 	@Column(name = "receiver_id")
-	@JsonProperty(value = "receiver_id")
+	@JsonIgnore
 	private Long receiverId;
 	
 	@Column(name = "message_id")
-	@JsonProperty(value = "message_id")
+	@JsonIgnore
 	private Long messageId;
 	
 	@Transient

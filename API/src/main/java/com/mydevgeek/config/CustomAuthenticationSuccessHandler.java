@@ -31,6 +31,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         httpServletResponse.setStatus(HttpServletResponse.SC_OK);
  
         //we will redirect the user after successfully login
-        httpServletResponse.sendRedirect("/auth/user");
+        httpServletResponse.sendRedirect("/auth/session/user");
     }
 }
