@@ -35,6 +35,10 @@ public class UserMessage implements Serializable {
 	@JsonIgnore
 	private Long messageId;
 	
+	@Column(name = "is_opened")
+	@JsonProperty(value = "is_opened")
+	private boolean isOpened;
+	
 	@Transient
 	private User sender;
 	
@@ -49,6 +53,7 @@ public class UserMessage implements Serializable {
 		this.senderId = null;
 		this.receiverId = null;
 		this.messageId = null;
+		this.isOpened = false;
 		this.sender = new User();
 		this.receiver = new User();
 		this.message = new Message();
@@ -59,6 +64,7 @@ public class UserMessage implements Serializable {
 		this.senderId = sid;
 		this.receiverId = rid;
 		this.messageId = mid;
+		this.isOpened = false;
 		this.sender = new User();
 		this.receiver = new User();
 		this.message = new Message();
@@ -114,6 +120,14 @@ public class UserMessage implements Serializable {
 	
 	public void setMessage(Message m) {
 		this.message = m;
+	}
+	
+	public boolean getIsOpened() {
+		return this.isOpened;
+	}
+	
+	public void setIsOpened(boolean io) {
+		this.isOpened = io;
 	}
 	
 }
