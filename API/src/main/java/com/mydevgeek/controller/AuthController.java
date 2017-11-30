@@ -18,11 +18,14 @@ import com.mydevgeek.domain.Message;
 import com.mydevgeek.repo.MessageRepository; 
 import com.mydevgeek.repo.UserMessageRepository;
 
+import com.mydevgeek.domain.Property;
+import com.mydevgeek.repo.PropertyRepository;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "http://localhost:8888")
+@CrossOrigin(origins = "http://localhost:8080, http://localhost:8888")
 public class AuthController {
 	
 	@Autowired
@@ -33,6 +36,9 @@ public class AuthController {
 	
 	@Autowired
 	private UserMessageRepository userMessageRepository;
+	
+	@Autowired
+	private PropertyRepository propertyRepository;
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
     public User logout(HttpServletRequest request) {
@@ -53,6 +59,7 @@ public class AuthController {
 		}
     }
 	
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/session/user", method = RequestMethod.GET)
 	public User getUser(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -64,6 +71,22 @@ public class AuthController {
 		} else {
 			return new User();
 		}
+	}
+	
+	@RequestMapping(value = "/session/property", method = RequestMethod.GET)
+	public ResponseEntity<?> getProperty(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
+		List<Property> pl = null;
+		User u = (User) session.getAttribute("user");
+		
+		pl = propertyRepository.findByUserId(u.getId());
+		
+		for(Property pr : pl) {
+            pr.setTenants(userRepository.findTenantsAtProperty(pr.getId()));
+        }
+		
+		return ResponseEntity.accepted().body(pl);
 	}
 	
 	@RequestMapping(value = "/session/inbox/{spec}", method = RequestMethod.GET)

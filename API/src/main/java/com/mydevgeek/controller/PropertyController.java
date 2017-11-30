@@ -30,7 +30,7 @@ import static java.lang.System.in;
 
 @RestController
 @RequestMapping("/property")
-@CrossOrigin(origins = "http://localhost:8888")
+@CrossOrigin(origins = "http://localhost:8080, http://localhost:8888")
 public class PropertyController {
 
     @Autowired

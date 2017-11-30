@@ -28,7 +28,7 @@ import com.mydevgeek.domain.User;
 
 @RestController
 @RequestMapping("/message")
-@CrossOrigin(origins = "http://localhost:8888")
+@CrossOrigin(origins = "http://localhost:8080, http://localhost:8888")
 public class MessageController {
 	
 	@Autowired
