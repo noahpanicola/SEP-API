@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:8888")
 public class UserController {
 
     @Autowired

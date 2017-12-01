@@ -28,7 +28,7 @@ import com.mydevgeek.domain.User;
 
 @RestController
 @RequestMapping("/message")
-@CrossOrigin(origins = "http://localhost:8080, http://localhost:8888")
+@CrossOrigin(origins = "http://localhost:8888")
 public class MessageController {
 	
 	@Autowired
@@ -47,18 +47,21 @@ public class MessageController {
     		return ResponseEntity.accepted().body(messageRepository.findOne(id));
     }
     
-    /* SEND A MESSAGE TO A USER BY USER ID */
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> sendMessageByReceiverId(@RequestBody Map<String,String> payload, HttpServletRequest request) {
+    /* SEND A MESSAGE TO A USER */
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<?> sendMessageBySession(@RequestBody Map<String,String> payload, HttpServletRequest request) {
     		
     		//check to see if the correct parameters are supplied
-    		if(payload.get("body") == null || payload.get("header") == null || payload.get("receiver_id") == null) {
+    		if(payload.get("body") == null || payload.get("header") == null || payload.get("receiver_email") == null) {
     			return ResponseEntity.badRequest().body("Incorrect parameters supplied");
     		}
     		
     		//get the logged in user
     		HttpSession session = request.getSession();
     		User u = (User) session.getAttribute("user");
+    		
+    		//get the receiver
+    		User r = userRepository.findByEmail(payload.get("receiver_email"));
     	
     		//create the new message
     		Message m = new Message();
@@ -66,8 +69,8 @@ public class MessageController {
     		m.setHeader(payload.get("header"));
     		
     		//get the current time
-    		java.sql.Date sDate = convertUtilToSql(new java.util.Date());
-    		m.setTimeSent(sDate.toString()); //get the actual time later... this is just for testing
+    		java.util.Date date = new java.util.Date();
+    		m.setTimeSent(new java.sql.Timestamp(date.getTime()).toString()); //get the actual time later... this is just for testing
     		
     		m = messageRepository.save(m);
     		
@@ -75,7 +78,7 @@ public class MessageController {
     		UserMessage um = new UserMessage();
     		um.setIsOpened(false);
     		um.setMessageId(m.getId());
-    		um.setReceiverId(Long.parseLong(payload.get("receiver_id")));
+    		um.setReceiverId(r.getId());
     		um.setSenderId(u.getId());
     		um = userMessageRepository.save(um);
     		
