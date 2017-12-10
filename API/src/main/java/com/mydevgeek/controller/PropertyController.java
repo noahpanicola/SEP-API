@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import static java.lang.System.in;
 
@@ -85,7 +86,7 @@ public class PropertyController {
     
     /* CREATE A NEW PROPERTY */
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<?> addProperty(@RequestBody Map<String,String> payload, @RequestParam("uid") Long uid) throws Exception {
+    public ResponseEntity<?> addProperty(@RequestBody Map<String,String> payload, HttpServletRequest request) throws Exception {
     	
     		//return an error if the incorrect parameters are supplied
     		if(payload.get("street_address") == null || payload.get("state") == null || payload.get("zip") == null || payload.get("city") == null)
@@ -97,6 +98,10 @@ public class PropertyController {
         p.setCity(payload.get("city"));
         p.setState(payload.get("state"));
         p.setZip(payload.get("zip"));
+        
+        //get the user from the session
+        HttpSession session = request.getSession();
+        User u = (User) session.getAttribute("user");
 
         //get latitude and longitude from google's API if it is not provided
         if(payload.get("coord_lat") != null && payload.get("coord_long") != null) { 
@@ -129,7 +134,7 @@ public class PropertyController {
         //Associate the manager to the property and save it
         UserProperty up = new UserProperty();
         up.setIsManager(true);
-        up.setUserId(uid);
+        up.setUserId(u.getId());
         up.setPropertyId(p.getId());
         
         //save the new user_property association
