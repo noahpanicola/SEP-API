@@ -1,5 +1,5 @@
 # SEP-API
-Back-end to SEP-WEB
+Back-end to CS4320-FinalProject
 
 ## Deployment
 Amazon Web Services Code Deployment
