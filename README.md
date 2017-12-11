@@ -2,7 +2,7 @@
 Back-end to CS4320-FinalProject. 
 
 ## Prerequisites
-Maven Version 3
+Maven Version 3 <br />
 Docker Version 17
 
 ## Deployment
